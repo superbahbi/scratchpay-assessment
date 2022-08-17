@@ -63,9 +63,7 @@ interface ListProps {
 const List: React.FC<ListProps> = ({ users }) => {
   const theme = useContext(ThemeContext);
   function getInitials(fistName: string, lastName: string) {
-    const fN = fistName.split(" ");
-    const ln = lastName.split(" ");
-    return fN[0].charAt(0) + ln[0].charAt(0);
+    return fistName.split(" ")[0].charAt(0) + lastName.split(" ")[0].charAt(0);
   }
   return (
     <StyledList>

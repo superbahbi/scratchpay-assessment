@@ -2,18 +2,29 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import List from "../Components/List";
 import Button from "../Components/Button";
+import Logo from "../Assets/Images/Brand-logo-Scratch-Horz-RGB@2x.png";
 import { IUserProps } from "../Utils/Iterfaces";
-const Container = styled.div`
+const StyledManageUser = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   border: 1px solid ${(props) => props.theme.color.default.border};
   border-radius: 0.5em;
   padding: 1em;
-`;
-const Header = styled.div`
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: ${(props) => props.theme.color.primary.midnight100};
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: ${(props) => props.theme.color.primary.midnight100};
+    }
+    .image {
+      img {
+        height: 2rem;
+      }
+    }
+  }
 `;
 
 interface ManageUserProps {}
@@ -41,11 +52,17 @@ const ManageUser: React.FC<ManageUserProps> = ({}) => {
     ]);
   }, []);
   return (
-    <Container>
-      <Header>Manage User</Header>
+    <StyledManageUser>
+      <div className="header">
+        <div className="title">Manage User</div>
+        <div className="image">
+          <img src={Logo} alt="logo" />
+        </div>
+      </div>
+
       <List users={users}></List>
       <Button></Button>
-    </Container>
+    </StyledManageUser>
   );
 };
 export default ManageUser;

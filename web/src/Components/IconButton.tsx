@@ -14,7 +14,7 @@ const StyledIconButton = styled.button<IconButtonProps>`
 `;
 interface IconButtonProps {
   color?: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   onHandleClick?: () => void;
 }
 
