@@ -17,6 +17,7 @@ export default {
       lightText: "#536471",
       border: "#eff3f4",
     },
+    avatar: ["#FF595A", "#FFB71B", "#60EDCE", "#6D64FF"],
   },
   fontSize: {
     small: "12px",

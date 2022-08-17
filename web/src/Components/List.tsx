@@ -6,33 +6,22 @@ import { ReactComponent as Edit } from "../Assets/Icons/edit.svg";
 import { ReactComponent as Delete } from "../Assets/Icons/delete.svg";
 const StyledList = styled.div`
   color: ${(props) => props.theme.color.primary.midnight100};
-  padding-bottom: 2em;
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  .list {
+  header,
+  .row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
+  .col {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0;
+    border-bottom: 1px solid ${(props) => props.theme.color.default.border};
+  }
+
   .personal-info-group {
     display: flex;
+    width: 200px;
     align-items: center;
-    .avatar {
-      position: relative;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: ${(props) => props.theme.color.primary.midnight50};
-      .initials {
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        color: ${(props) => props.theme.color.default.white};
-      }
-    }
     .name-id-group {
       padding-left: 1rem;
       .id {
@@ -49,9 +38,24 @@ const StyledList = styled.div`
     text-transform: capitalize;
   }
   .icon {
-    display: flex;
   }
 `;
+const Avatar = styled.div`
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${(props) =>
+    props.theme.color.avatar[Math.floor(Math.random() * 4)]};
+  .initials {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: ${(props) => props.theme.color.default.white};
+  }
+`;
+
 interface ListProps {
   users: IUserProps[];
 }
@@ -65,44 +69,58 @@ const List: React.FC<ListProps> = ({ users }) => {
   }
   return (
     <StyledList>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>
-            <div className="list">
-              <div className="personal-info-group">
-                <div className="avatar">
-                  <div className="initials">
-                    {getInitials(user.firstName, user.lastName)}
-                  </div>
+      <header>
+        <div className="col">Name</div>
+        <div className="col">Email</div>
+        <div className="col">Role</div>
+        <div className="col">Status</div>
+        <div className="col"></div>
+      </header>
+
+      {users.map((user) => (
+        <div className="row" key={user.id}>
+          <div className="col">
+            <div className="personal-info-group">
+              <Avatar>
+                <div className="initials">
+                  {getInitials(user.firstName, user.lastName)}
                 </div>
-                <div className="name-id-group">
-                  <div className="name">
-                    {user.firstName} {user.lastName}
-                  </div>
-                  <div className="id">#{user.id}</div>
+              </Avatar>
+              <div className="name-id-group">
+                <div className="name">
+                  {user.firstName} {user.lastName}
                 </div>
-              </div>
-              <div className="email">
-                <span>{user.email}</span>
-              </div>
-              <div className="role">
-                <span>{user.role}</span>
-              </div>
-              <div className="status">
-                <span>{user.status}</span>
-              </div>
-              <div className="icon">
-                <IconButton>
-                  <Edit />
-                </IconButton>
-                <IconButton color={theme.color.secondary.sunset}>
-                  <Delete />
-                </IconButton>
+                <div className="id">#{user.id}</div>
               </div>
             </div>
-          </li>
-        ))}
-      </ul>
+          </div>
+          <div className="col">
+            <div className="email">
+              <span>{user.email}</span>
+            </div>
+          </div>
+          <div className="col">
+            <div className="role">
+              <span>{user.role}</span>
+            </div>
+          </div>
+          <div className="col">
+            <div className="status">
+              <span>{user.status}</span>
+            </div>
+          </div>
+          <div className="col">
+            <div className="icon">
+              <IconButton>
+                <Edit />
+              </IconButton>
+              <IconButton color={theme.color.secondary.sunset}>
+                <Delete />
+              </IconButton>
+            </div>
+          </div>
+        </div>
+      ))}
     </StyledList>
   );
 };

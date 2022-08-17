@@ -4,7 +4,7 @@ import List from "../Components/List";
 import Button from "../Components/Button";
 import { IUserProps } from "../Utils/Iterfaces";
 const Container = styled.div`
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   border: 1px solid ${(props) => props.theme.color.default.border};
   border-radius: 0.5em;
@@ -28,6 +28,14 @@ const ManageUser: React.FC<ManageUserProps> = ({}) => {
         firstName: "Robert",
         lastName: "Kugler",
         role: "admin",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
         status: "active",
       },
     ]);
