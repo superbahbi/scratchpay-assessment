@@ -1,1 +1,132 @@
-body {}
+@font-face {
+  font-family: 'Hero';
+  font-weight: 100;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Hairline.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 100;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Hairline\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 200;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ UltraLight.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 200;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ UltraLight\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 300;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Light.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 300;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Light\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 400;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Regular.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 400;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Regular\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 500;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Medium.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 500;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Medium\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 600;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ SemiBold.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 600;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ SemiBold\ Italic.otf) format('opentype');
+
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 700;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Bold.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 700;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Bold\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 800;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ ExtraBold.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 800;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ ExtraBold\ Italic.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 900;
+  font-style: normal;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Super.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Hero';
+  font-weight: 900;
+  font-style: italic;
+  src: local('Hero'), url(./Assets/font/Hero\ New\ Super\ Italic.otf) format('opentype');
+}
+
+body {
+  font-family: "Hero", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
