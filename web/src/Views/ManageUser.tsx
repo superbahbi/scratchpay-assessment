@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import List from "../Components/List";
 import Button from "../Components/Button";
-import Logo from "../Assets/Images/Brand-logo-Scratch-Horz-RGB@2x.png";
 import { IUserProps } from "../Utils/Iterfaces";
 const StyledManageUser = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   border: 1px solid ${(props) => props.theme.color.default.border};
   border-radius: 0.5em;
   padding: 1em;
@@ -18,11 +16,6 @@ const StyledManageUser = styled.div`
       font-size: 1.5rem;
       font-weight: 800;
       color: ${(props) => props.theme.color.primary.midnight100};
-    }
-    .image {
-      img {
-        height: 2rem;
-      }
     }
   }
 `;
@@ -49,19 +42,95 @@ const ManageUser: React.FC<ManageUserProps> = ({}) => {
         role: "Doctor",
         status: "active",
       },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
+      {
+        id: "222222",
+        email: "bahbi@bahbi.net",
+        firstName: "Bahbi",
+        lastName: "Lee",
+        role: "Doctor",
+        status: "active",
+      },
     ]);
   }, []);
   return (
     <StyledManageUser>
       <div className="header">
         <div className="title">Manage User</div>
-        <div className="image">
-          <img src={Logo} alt="logo" />
-        </div>
       </div>
-
-      <List users={users}></List>
-      <Button></Button>
+      <List users={users} />
+      <Button />
     </StyledManageUser>
   );
 };
