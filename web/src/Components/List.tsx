@@ -1,124 +1,146 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled, { ThemeContext } from "styled-components";
-import { IUserProps } from "../Utils/Iterfaces";
-import IconButton from "../Components/IconButton";
-import { ReactComponent as Edit } from "../Assets/Icons/edit.svg";
 import { ReactComponent as Delete } from "../Assets/Icons/delete.svg";
+import { ReactComponent as Edit } from "../Assets/Icons/edit.svg";
+import IconButton from "../Components/IconButton";
+import { IListProps, IUserProps } from "../Utils/Iterfaces";
+import Form from "./Form";
+import Modal from "./Modal";
+
 const StyledList = styled.div`
   color: ${(props) => props.theme.color.primary.midnight100};
-  header,
-  .row {
-    display: flex;
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-family: sans-serif;
+    min-width: 400px;
   }
-  .col {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: 0.5em 0;
+  .styled-table thead tr {
+    background-color: ${(props) => props.theme.color.primary.midnight100};
+    color: ${(props) => props.theme.color.default.white};
+    text-align: left;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 0.75rem 1rem;
+  }
+  .styled-table tbody tr {
     border-bottom: 1px solid ${(props) => props.theme.color.default.border};
   }
 
-  .personal-info-group {
-    display: flex;
-    width: 200px;
-    align-items: center;
-    .name-id-group {
-      padding-left: 1rem;
-      .id {
-        color: ${(props) => props.theme.color.default.lightText};
-      }
-    }
+  .id {
+    color: ${(props) => props.theme.color.default.lightText};
+  }
+  .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .email {
+    max-width: 9.375rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .role {
     text-transform: capitalize;
   }
   .status {
     text-transform: capitalize;
+
+    .text {
+      border-radius: 9999px;
+      padding: 0.2rem 0.8rem;
+    }
+    .active {
+      background-color: ${(props) => props.theme.color.secondary.mint};
+    }
+    .inactive {
+      background-color: ${(props) => props.theme.color.secondary.sunset};
+    }
   }
-  .icon {
-  }
-`;
-const Avatar = styled.div`
-  position: relative;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.theme.color.avatar[Math.floor(Math.random() * 4)]};
-  .initials {
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: ${(props) => props.theme.color.default.white};
+  .action {
   }
 `;
 
-interface ListProps {
-  users: IUserProps[];
-}
-
-const List: React.FC<ListProps> = ({ users }) => {
+const List: React.FC<IListProps> = ({ users, setUsers }) => {
   const theme = useContext(ThemeContext);
-  function getInitials(fistName: string, lastName: string) {
-    return fistName.split(" ")[0].charAt(0) + lastName.split(" ")[0].charAt(0);
-  }
+  const [modal, setModal] = useState(false);
+  const [editUser, setEditUser] = useState<IUserProps>();
+  const Toggle = () => setModal(!modal);
   return (
     <StyledList>
-      <header>
-        <div className="col">Name</div>
-        <div className="col">Email</div>
-        <div className="col">Role</div>
-        <div className="col">Status</div>
-        <div className="col"></div>
-      </header>
+      <table className="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user, index) => (
+            <tr key={index}>
+              <td className="id">#{user.id}</td>
+              <td className="name">
+                {user.firstName} {user.lastName}
+              </td>
+              <td className="email">{user.email}</td>
+              <td className="role">{user.role}</td>
+              <td className="status">
+                <span
+                  className={`text ${
+                    user.status === "active" ? "active" : "inactive"
+                  }`}
+                >
+                  {user.status}
+                </span>
+              </td>
+              <td className="action">
+                <div className="icon">
+                  <IconButton
+                    index={index}
+                    color={theme.color.secondary.sea}
+                    onHandleClick={() => {
+                      Toggle();
+                      setEditUser(user);
+                    }}
+                  >
+                    <Edit />
+                  </IconButton>
+                  <IconButton
+                    index={index}
+                    color={theme.color.secondary.sunset}
+                    onHandleClick={() => {
+                      // console.log(index);
 
-      {users.map((user) => (
-        <div className="row" key={user.id}>
-          <div className="col">
-            <div className="personal-info-group">
-              <Avatar>
-                <div className="initials">
-                  {getInitials(user.firstName, user.lastName)}
+                      setUsers([
+                        ...users.slice(0, index),
+                        ...users.slice(index + 1),
+                      ]);
+                    }}
+                  >
+                    <Delete />
+                  </IconButton>
                 </div>
-              </Avatar>
-              <div className="name-id-group">
-                <div className="name">
-                  {user.firstName} {user.lastName}
-                </div>
-                <div className="id">#{user.id}</div>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="email">
-              <span>{user.email}</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="role">
-              <span>{user.role}</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="status">
-              <span>{user.status}</span>
-            </div>
-          </div>
-          <div className="col">
-            <div className="icon">
-              <IconButton>
-                <Edit />
-              </IconButton>
-              <IconButton color={theme.color.secondary.sunset}>
-                <Delete />
-              </IconButton>
-            </div>
-          </div>
-        </div>
-      ))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <Modal show={modal} close={() => Toggle()}>
+        <Form
+          users={users}
+          setUsers={setUsers}
+          close={Toggle}
+          formTitle="Edit user"
+          formType="Edit"
+          editUser={editUser}
+        />
+      </Modal>
     </StyledList>
   );
 };

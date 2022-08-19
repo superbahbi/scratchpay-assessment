@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import List from "../Components/List";
+import { ReactComponent as NewUser } from "../Assets/Icons/new-user.svg";
 import Button from "../Components/Button";
-import { IUserProps } from "../Utils/Iterfaces";
+import Form from "../Components/Form";
+import List from "../Components/List";
+import Modal from "../Components/Modal";
+import { IManageUserProps, IUserProps } from "../Utils/Iterfaces";
 const StyledManageUser = styled.div`
   width: 100%;
   border: 1px solid ${(props) => props.theme.color.default.border};
@@ -12,6 +15,7 @@ const StyledManageUser = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 1em;
     .title {
       font-size: 1.5rem;
       font-weight: 800;
@@ -20,10 +24,10 @@ const StyledManageUser = styled.div`
   }
 `;
 
-interface ManageUserProps {}
-
-const ManageUser: React.FC<ManageUserProps> = ({}) => {
+const ManageUser: React.FC<IManageUserProps> = ({}) => {
   const [users, setUsers] = useState<IUserProps[]>([]);
+  const [modal, setModal] = useState(false);
+  const Toggle = () => setModal(!modal);
   useEffect(() => {
     setUsers([
       {
@@ -39,88 +43,32 @@ const ManageUser: React.FC<ManageUserProps> = ({}) => {
         email: "bahbi@bahbi.net",
         firstName: "Bahbi",
         lastName: "Lee",
-        role: "Doctor",
+        role: "accountant",
         status: "active",
       },
       {
-        id: "222222",
+        id: "333333",
         email: "bahbi@bahbi.net",
         firstName: "Bahbi",
         lastName: "Lee",
-        role: "Doctor",
+        role: "doctor",
         status: "active",
       },
       {
-        id: "222222",
+        id: "444444",
         email: "bahbi@bahbi.net",
         firstName: "Bahbi",
         lastName: "Lee",
-        role: "Doctor",
+        role: "doctor",
         status: "active",
       },
       {
-        id: "222222",
+        id: "555555",
         email: "bahbi@bahbi.net",
         firstName: "Bahbi",
         lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "Doctor",
-        status: "active",
+        role: "doctor",
+        status: "inactive",
       },
     ]);
   }, []);
@@ -128,9 +76,22 @@ const ManageUser: React.FC<ManageUserProps> = ({}) => {
     <StyledManageUser>
       <div className="header">
         <div className="title">Manage User</div>
+        <Button onHandleClick={() => Toggle()}>
+          <NewUser />
+          Add New User
+        </Button>
       </div>
-      <List users={users} />
-      <Button />
+      <List users={users} setUsers={setUsers} />
+
+      <Modal show={modal} close={() => Toggle()}>
+        <Form
+          users={users}
+          setUsers={setUsers}
+          close={Toggle}
+          formTitle="New user"
+          formType="Add"
+        />
+      </Modal>
     </StyledManageUser>
   );
 };

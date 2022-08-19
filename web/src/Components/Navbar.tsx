@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../Assets/Images/Brand-logo-Scratch-Horz-RGB@2x.png";
 import styled from "styled-components";
 import { ReactComponent as Account } from "../Assets/Icons/account.svg";
+import { INavbarProps } from "../Utils/Iterfaces";
 const StyledNavbar = styled.nav`
   display: flex;
   width: 300px;
@@ -22,7 +23,8 @@ const StyledNavbar = styled.nav`
     li {
       display: flex;
       a {
-        display: block;
+        display: flex;
+        align-items: flex-end;
         padding: 0.5rem 1rem;
         text-decoration: none;
         .icon {
@@ -36,9 +38,8 @@ const StyledNavbar = styled.nav`
     }
   }
 `;
-interface NavbarProps {}
 
-const Navbar: React.FC<NavbarProps> = ({}) => {
+const Navbar: React.FC<INavbarProps> = ({}) => {
   return (
     <StyledNavbar>
       <ul>

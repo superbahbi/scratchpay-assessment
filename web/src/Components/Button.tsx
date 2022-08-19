@@ -1,29 +1,35 @@
 import React from "react";
 import styled from "styled-components";
+import { IButtonProps } from "../Utils/Iterfaces";
 
 const StyledButton = styled.div`
   display: flex;
-  justify-content: flex-end;
   .button {
+    display: flex;
+    align-items: flex-end;
+    font-family: "Hero", sans-serif;
+    font-size: 1rem;
     background-color: ${(props) => props.theme.color.primary.midnight50};
     color: ${(props) => props.theme.color.default.white};
-    font-size: 1rem;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    margin: 0.5em 0;
+
+    border-radius: 9999em;
+    padding: 0.5em 1.5em;
     border: none;
     &:hover {
       opacity: 0.9;
     }
+    svg {
+      fill: ${(props) => props.theme.color.default.white};
+    }
   }
 `;
 
-interface ButtonProps {}
-
-const Button: React.FC<ButtonProps> = () => {
+const Button: React.FC<IButtonProps> = ({ onHandleClick, children, type }) => {
   return (
     <StyledButton>
-      <button className="button">Add New User</button>
+      <button className="button" type={type} onClick={onHandleClick}>
+        {children}
+      </button>
     </StyledButton>
   );
 };

@@ -1,29 +1,33 @@
 import React from "react";
 import styled from "styled-components";
-const StyledIconButton = styled.button<IconButtonProps>`
+import { IIconButtonProps } from "../Utils/Iterfaces";
+const StyledIconButton = styled.button<IIconButtonProps>`
   padding: 0;
   border: none;
-  background: none;
+  background-color: ${(props) => props.theme.color.default.border};
+  border-radius: 50%;
+  margin: 0.2em;
   cursor: pointer;
   svg {
     padding: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: ${(props) => props.color};
+    width: 1rem;
+    height: 1rem;
+    fill: ${(props) => props.theme.color.primary.midnight100};
+    &:hover {
+      fill: ${(props) => props.theme.color.default.white};
+      background-color: ${(props) => props.color};
+      border-radius: 50%;
   }
 `;
-interface IconButtonProps {
-  color?: string;
-  children: React.ReactNode;
-  onHandleClick?: () => void;
-}
 
-const IconButton: React.FC<IconButtonProps> = ({ color, children }) => {
-  const onHandleClick = () => {
-    console.log("onHandleClick");
-  };
+const IconButton: React.FC<IIconButtonProps> = ({
+  index,
+  color,
+  children,
+  onHandleClick,
+}) => {
   return (
-    <StyledIconButton onClick={onHandleClick} color={color}>
+    <StyledIconButton index={index} onClick={onHandleClick} color={color}>
       {children}
     </StyledIconButton>
   );
