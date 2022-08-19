@@ -43,5 +43,8 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26"
-  }
+  },
+  "repository": "https://github.com/superbahbi/scratchpay-assessment/web",
+  "author": "Robert Kugler",
+  "license": "MIT"
 }
