@@ -29,48 +29,12 @@ const ManageUser: React.FC<IManageUserProps> = ({}) => {
   const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);
   useEffect(() => {
-    setUsers([
-      {
-        id: "111111",
-        email: "superbahbi@gmail.com",
-        firstName: "Robert",
-        lastName: "Kugler",
-        role: "admin",
-        status: "active",
-      },
-      {
-        id: "222222",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "accountant",
-        status: "active",
-      },
-      {
-        id: "333333",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "doctor",
-        status: "active",
-      },
-      {
-        id: "444444",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "doctor",
-        status: "active",
-      },
-      {
-        id: "555555",
-        email: "bahbi@bahbi.net",
-        firstName: "Bahbi",
-        lastName: "Lee",
-        role: "doctor",
-        status: "inactive",
-      },
-    ]);
+    async function fetchData() {
+      const res = await fetch("http://localhost:3001/users");
+      const data = await res.json();
+      setUsers(data);
+    }
+    fetchData();
   }, []);
   return (
     <StyledManageUser>
