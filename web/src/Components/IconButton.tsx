@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { IIconButtonProps } from "../Utils/Iterfaces";
-const StyledIconButton = styled.button<IIconButtonProps>`
+const StyledIconButton = styled.div<IIconButtonProps>`
+.button {
   padding: 0;
   border: none;
   background-color: ${(props) => props.theme.color.default.border};
@@ -18,8 +19,15 @@ const StyledIconButton = styled.button<IIconButtonProps>`
       background-color: ${(props) => props.color};
       border-radius: 50%;
   }
+}
 `;
-
+/**
+ * Icon Button component
+ * @param { number } index - index of user
+ * @param { string } color - color of icon button hover
+ * @param { React.ReactNode } children - children of icon button
+ * @param { () => void } onHandleClick function to handle click event
+ */
 const IconButton: React.FC<IIconButtonProps> = ({
   index,
   color,
@@ -27,8 +35,10 @@ const IconButton: React.FC<IIconButtonProps> = ({
   onHandleClick,
 }) => {
   return (
-    <StyledIconButton index={index} onClick={onHandleClick} color={color}>
-      {children}
+    <StyledIconButton index={index} color={color}>
+      <button role="iconbutton" className="button" onClick={onHandleClick}>
+        {children}
+      </button>
     </StyledIconButton>
   );
 };

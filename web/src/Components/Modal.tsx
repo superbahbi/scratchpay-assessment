@@ -20,7 +20,7 @@ const StyledModal = styled.div`
     padding: 20px;
     border: 1px solid ${(props) => props.theme.color.default.border};
     border-radius: 1rem;
-    width: 30%;
+    max-width: 300px;
   }
   .close {
     color: ${(props) => props.theme.color.primary.midnight50};
@@ -37,7 +37,12 @@ const StyledModal = styled.div`
     cursor: pointer;
   }
 `;
-
+/**
+ * Modal component
+ * @param {boolean} show true | false; }
+ * @param { () => void } close function to handle close event
+ * @param { React.ReactNode } children React node to render inside the modal
+ */
 const Modal: React.FC<IModalProps> = ({ show, close, children }) => {
   return (
     <>

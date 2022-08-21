@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IFormProps, IUserProps } from "../Utils/Iterfaces";
+import { IFormError, IFormProps, IUserProps } from "../Utils/Iterfaces";
 import Button from "./Button";
-
+import { fetchDB } from "../Utils/Fetch";
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -36,8 +36,20 @@ const StyledForm = styled.form`
     justify-content: flex-end;
     padding: 1rem 0;
   }
+  .error {
+    border: 1px solid ${(props) => props.theme.color.secondary.sunset};
+  }
 `;
 
+/**
+ * Form component
+ * @param { IUserProps[] } users - users array
+ * @param { React.Dispatch<React.SetStateAction<IUserProps[]>> } setUsers - set users array
+ * @param { () => void } close - close modal function
+ * @param { string } formTitle - set form title
+ * @param { string } formType - set form type "Add" or "Edit"
+ * @param { IUserProps } editUser - edit user object
+ */
 const Form: React.FC<IFormProps> = ({
   users,
   setUsers,
@@ -54,23 +66,29 @@ const Form: React.FC<IFormProps> = ({
     role: editUser?.role || "",
     status: editUser?.status || "",
   });
+  const [error, setError] = useState<IFormError | null>();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("form", formData);
     if (formType === "Add") {
-      setUsers([...users, formData]);
-    } else if (formType === "Edit") {
-      const newState = users.map((user) => {
-        // console.log("user", user);
-        // console.log("form", formData);
-        if (user.id === formData.id) {
-          console.log("found user");
-          return formData;
+      fetchDB("/users", "POST", formData).then((res) => {
+        if (res.status === 200) {
+          setUsers([...users, res.data]);
         }
-        return user;
       });
-      console.log(newState);
-      setUsers(newState);
+    } else if (formType === "Edit") {
+      fetchDB("/users", "PUT", formData).then((res) => {
+        if (res.status === 200) {
+          setUsers(
+            users.map((user) => {
+              if (user.id === res.data.id) {
+                return res.data;
+              } else {
+                return user;
+              }
+            })
+          );
+        }
+      });
     }
     setFormData({
       id: "",
@@ -83,6 +101,13 @@ const Form: React.FC<IFormProps> = ({
     close();
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "email") {
+      users.map((user) =>
+        user.email === e.target.value
+          ? setError({ email: "Email already exists" })
+          : setError(null)
+      );
+    }
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSelectChange = (e: React.FormEvent<HTMLSelectElement>) => {
@@ -115,6 +140,7 @@ const Form: React.FC<IFormProps> = ({
       />
       <label>Email:</label>
       <input
+        className={error?.email ? "error" : ""}
         type="email"
         name="email"
         onChange={handleChange}
@@ -145,7 +171,9 @@ const Form: React.FC<IFormProps> = ({
         <option value="inactive">Inactive</option>
       </select>
       <div className="btn-container">
-        <Button type="submit">{formType}</Button>
+        <Button disabled={error?.email ? true : false} type="submit">
+          {formType}
+        </Button>
       </div>
     </StyledForm>
   );

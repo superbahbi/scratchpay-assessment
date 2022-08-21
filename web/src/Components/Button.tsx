@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { IButtonProps } from "../Utils/Iterfaces";
 
-const StyledButton = styled.div`
+const StyledButton = styled.div<IButtonProps>`
   display: flex;
   .button {
     display: flex;
-    align-items: flex-end;
     font-family: "Hero", sans-serif;
-    font-size: 1rem;
     background-color: ${(props) => props.theme.color.primary.midnight50};
     color: ${(props) => props.theme.color.default.white};
 
@@ -18,16 +16,38 @@ const StyledButton = styled.div`
     &:hover {
       opacity: 0.9;
     }
+
     svg {
       fill: ${(props) => props.theme.color.default.white};
+      height: 1rem;
+      width: 1rem;
+      padding-right: 0.2rem;
     }
   }
 `;
-
-const Button: React.FC<IButtonProps> = ({ onHandleClick, children, type }) => {
+/**
+ * Button component
+ * @param onHandleClick function to handle click event
+ * @param children React node to render inside the button
+ * @param type "button" | "submit" | "reset";
+ * @param disabled true | false;
+ */
+const Button: React.FC<IButtonProps> = ({
+  onHandleClick,
+  children,
+  type,
+  disabled,
+  role,
+}) => {
   return (
-    <StyledButton>
-      <button className="button" type={type} onClick={onHandleClick}>
+    <StyledButton disabled>
+      <button
+        role={role}
+        className="button"
+        type={type}
+        onClick={onHandleClick}
+        disabled={disabled}
+      >
         {children}
       </button>
     </StyledButton>
