@@ -3,8 +3,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/superbahbi/scratchpay-assessment">
-    <img src="" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/1689092/185775671-d13bbb57-a6b0-4d3b-aa95-74ac3ab8be14.png" alt="Logo" width="80" height="80">
   </a>
+
 
 <h3 align="center">Scratchpay Assessment</h3>
 </div>
