@@ -2,8 +2,9 @@
 import http from "http";
 import express, { Express, Request, Response, NextFunction } from "express";
 import morgan from "morgan";
-import routes from "./src/routes/users";
+import routes, { route } from "./src/routes/users";
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config({ path: ".env" });
 const router: Express = express();
 
@@ -13,23 +14,8 @@ router.use(morgan("dev"));
 router.use(express.urlencoded({ extended: false }));
 /** Takes care of JSON data */
 router.use(express.json());
-
-/** RULES OF OUR API */
-router.use((req: Request, res: Response, next: NextFunction) => {
-  // set the CORS policy
-  res.header("Access-Control-Allow-Origin", "*");
-  // set the CORS headers
-  res.header(
-    "Access-Control-Allow-Headers",
-    "origin, X-Requested-With,Content-Type,Accept, Authorization"
-  );
-  // set the CORS method headers
-  if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST");
-    return res.status(200).json({});
-  }
-  next();
-});
+/** Allow Cross-Origin Resource Sharing */
+router.use(cors());
 
 /** Routes */
 router.use("/", routes);
