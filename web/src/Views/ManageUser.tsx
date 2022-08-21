@@ -5,6 +5,7 @@ import Button from "../Components/Button";
 import Form from "../Components/Form";
 import List from "../Components/List";
 import Modal from "../Components/Modal";
+import { fetchDB } from "../Utils/Fetch";
 import { IManageUserProps, IUserProps } from "../Utils/Iterfaces";
 const StyledManageUser = styled.div`
   width: 100%;
@@ -24,23 +25,22 @@ const StyledManageUser = styled.div`
   }
 `;
 
-const ManageUser: React.FC<IManageUserProps> = ({}) => {
+const ManageUser: React.FC<IManageUserProps> = () => {
   const [users, setUsers] = useState<IUserProps[]>([]);
   const [modal, setModal] = useState(false);
   const Toggle = () => setModal(!modal);
   useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("http://localhost:3001/users");
-      const data = await res.json();
-      setUsers(data);
-    }
-    fetchData();
+    fetchDB("/users", "GET").then((res) => {
+      if (res.status === 200) {
+        setUsers(res.data);
+      }
+    });
   }, []);
   return (
     <StyledManageUser>
       <div className="header">
         <div className="title">Manage User</div>
-        <Button onHandleClick={() => Toggle()}>
+        <Button onHandleClick={() => Toggle()} role="newuserbutton">
           <NewUser />
           Add New User
         </Button>

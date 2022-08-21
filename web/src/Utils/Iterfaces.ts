@@ -22,6 +22,8 @@ export interface IButtonProps {
   onHandleClick?: () => void;
   children: React.ReactNode;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  role?: string;
 }
 export interface IFormProps {
   users: IUserProps[];
@@ -35,6 +37,9 @@ export interface IModalProps {
   show: boolean;
   close?: () => void;
   children: React.ReactNode;
+}
+export interface IFormError {
+  email: string;
 }
 export interface INavbarProps {}
 export interface IManageUserProps {}
