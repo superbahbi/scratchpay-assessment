@@ -67,7 +67,7 @@ Installing and running the client:
 
 ## Contact
 
-Robert Kugler- [@bahbilee](https://twitter.com/bahbilee) - bahbi@bahbi.net
+Robert Kugler- [@bahbilee](https://twitter.com/bahbilee)
 
 Project Link: [https://github.com/superbahbi/scratchpay-assessment](https://github.com/superbahbi/scratchpay-assessment)
 
